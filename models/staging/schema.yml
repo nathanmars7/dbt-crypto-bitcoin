@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_bitcoin_transactions
+    description: "Cleaned Bitcoin blockchain transactions for 2023. Values converted from Satoshis to BTC."
+    columns:
+      - name: transaction_hash
+        description: "Unique transaction identifier."
+        data_tests:
+          - not_null
+          - unique
+      - name: transaction_date
+        description: "Date the transaction was confirmed on the blockchain."
+        data_tests:
+          - not_null
+      - name: fee_btc
+        description: "Transaction fee paid to miners in BTC."
+        data_tests:
+          - not_null
+      - name: output_value_btc
+        description: "Total output value of the transaction in BTC."
+        data_tests:
+          - not_null

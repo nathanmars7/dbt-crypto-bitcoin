@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: mart_bitcoin_daily
+    description: "Daily Bitcoin blockchain metrics for 2023 including transaction counts, volumes, fees and 7-day moving averages."
+    columns:
+      - name: transaction_date
+        description: "The date of the transactions."
+        data_tests:
+          - not_null
+          - unique
+      - name: total_transactions
+        description: "Total number of transactions confirmed on that day."
+        data_tests:
+          - not_null
+      - name: total_volume_btc
+        description: "Total output value across all transactions in BTC."
+        data_tests:
+          - not_null
+      - name: transactions_7d_avg
+        description: "7-day rolling average of daily transaction count."
+      - name: volume_7d_avg_btc
+        description: "7-day rolling average of daily transaction volume in BTC."
+
+  - name: mart_bitcoin_monthly
+    description: "Monthly rollup of Bitcoin blockchain metrics for 2023. One row per month."
+    columns:
+      - name: transaction_month
+        description: "First day of the month."
+        data_tests:
+          - not_null
+          - unique
+      - name: total_transactions
+        description: "Total transactions for the month."
+        data_tests:
+          - not_null
+      - name: peak_daily_transactions
+        description: "Highest single-day transaction count within the month."
+      - name: min_daily_transactions
+        description: "Lowest single-day transaction count within the month."

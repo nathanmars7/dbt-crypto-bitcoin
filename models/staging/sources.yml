@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: crypto_bitcoin
+    database: bigquery-public-data
+    schema: crypto_bitcoin
+    description: "Bitcoin blockchain data provided by Google Cloud Public Datasets."
+
+    tables:
+      - name: transactions
+        description: "Every Bitcoin transaction recorded on the blockchain."
+        columns:
+          - name: hash
+            description: "Unique transaction hash."
+          - name: block_timestamp
+            description: "Timestamp when the block containing this transaction was mined."
+          - name: input_value
+            description: "Total value of inputs in Satoshis."
+          - name: output_value
+            description: "Total value of outputs in Satoshis."
+          - name: fee
+            description: "Transaction fee paid to miners in Satoshis."
+          - name: input_count
+            description: "Number of inputs in the transaction."
+          - name: output_count
+            description: "Number of outputs in the transaction."
