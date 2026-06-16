@@ -51,6 +51,10 @@ This project transforms raw Bitcoin blockchain data from BigQuery's public datas
 - **SCD Type 2** — `dbt_valid_from` and `dbt_valid_to` columns for full history tracking
 - **Reserved keyword handling** — backtick quoting for BigQuery reserved words like `hash`
 
+## Performance
+
+`stg_bitcoin_transactions` filters on `block_timestamp_month`, the source table's partition column, so BigQuery applies **partition pruning** and reads only the relevant 2023 partitions instead of the full 2.5 TB history. This cuts the daily mart's build scan from **156.5 GiB to 18.6 GiB (~88%)** with identical results — still 365 daily rows and 12 monthly rows. The lesson: always filter on the partition column, not just a related timestamp, or the optimizer can't prune.
+
 ## Key Insight
 
 Bitcoin transaction activity in 2023 showed a massive volume spike in late April/May driven by the Ordinals/BRC-20 token craze, followed by a steady climb in transaction counts through Q4 as the market entered a new bull cycle.
