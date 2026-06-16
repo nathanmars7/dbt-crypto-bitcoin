@@ -17,6 +17,18 @@ models:
         description: "Total output value across all transactions in BTC."
         data_tests:
           - not_null
+      - name: avg_transaction_btc
+        description: "Average output value per transaction in BTC for that day."
+      - name: total_fees_btc
+        description: "Total transaction fees paid across all transactions that day in BTC."
+      - name: avg_fee_btc
+        description: "Average fee per transaction in BTC for that day."
+      - name: avg_fee_pct
+        description: "Average fee as a percentage of transaction value for that day."
+      - name: avg_input_count
+        description: "Average number of inputs per transaction for that day."
+      - name: avg_output_count
+        description: "Average number of outputs per transaction for that day."
       - name: transactions_7d_avg
         description: "7-day rolling average of daily transaction count."
       - name: volume_7d_avg_btc
