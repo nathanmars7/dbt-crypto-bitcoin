@@ -13,11 +13,35 @@ models:
         description: "Date the transaction was confirmed on the blockchain."
         data_tests:
           - not_null
+      - name: input_count
+        description: "Number of inputs in the transaction."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+      - name: output_count
+        description: "Number of outputs in the transaction."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+      - name: input_value_btc
+        description: "Total input value of the transaction in BTC."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: fee_btc
         description: "Transaction fee paid to miners in BTC."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: output_value_btc
         description: "Total output value of the transaction in BTC."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0

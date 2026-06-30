@@ -13,26 +13,60 @@ models:
         description: "Total number of transactions confirmed on that day."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: total_volume_btc
         description: "Total output value across all transactions in BTC."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: avg_transaction_btc
         description: "Average output value per transaction in BTC for that day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: total_fees_btc
         description: "Total transaction fees paid across all transactions that day in BTC."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: avg_fee_btc
         description: "Average fee per transaction in BTC for that day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: avg_fee_pct
         description: "Average fee as a percentage of transaction value for that day."
       - name: avg_input_count
         description: "Average number of inputs per transaction for that day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
       - name: avg_output_count
         description: "Average number of outputs per transaction for that day."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
       - name: transactions_7d_avg
         description: "7-day rolling average of daily transaction count."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: volume_7d_avg_btc
         description: "7-day rolling average of daily transaction volume in BTC."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
 
   - name: mart_bitcoin_monthly
     description: "Monthly rollup of Bitcoin blockchain metrics for 2023. One row per month."
@@ -42,10 +76,43 @@ models:
         data_tests:
           - not_null
           - unique
+      - name: total_days
+        description: "Number of distinct days with transactions in the month."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
       - name: total_transactions
         description: "Total transactions for the month."
         data_tests:
           - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: total_volume_btc
+        description: "Total output value across all transactions for the month in BTC."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: avg_transaction_btc
+        description: "Average daily average output value per transaction in BTC for the month."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: total_fees_btc
+        description: "Total transaction fees paid across all transactions for the month in BTC."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: avg_fee_btc
+        description: "Average daily average fee per transaction in BTC for the month."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
       - name: peak_daily_transactions
         description: "Highest single-day transaction count within the month."
       - name: min_daily_transactions
